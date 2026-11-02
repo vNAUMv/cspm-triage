@@ -13,3 +13,5 @@ Short entries while working. One entry per notable moment.
 
 ## Entries
 
+- по умолчанию стоял auto mode, переключил на ручное подтверждение, потому что давать полный контроль агенту небезопасно
+- One problem along the way: ruff first failed on 9 files because they had no newline at the end. I ran ruff check --fix to add them, and nothing else changed.

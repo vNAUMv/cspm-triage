@@ -23,7 +23,7 @@ cspm_triage/
 tests/
   fixtures/      # sanitized sample Prowler output (no real account IDs or ARNs)
 config/
-  exceptions.yaml # accepted risks
+  exceptions.toml # accepted risks
 ```
 
 ## Rules
