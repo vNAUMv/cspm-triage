@@ -24,6 +24,8 @@ tests/
   fixtures/      # sanitized sample Prowler output (no real account IDs or ARNs)
 config/
   exceptions.toml # accepted risks
+scripts/
+  sanitize_fixture.py # build a sanitized test fixture from a real scan (input stays outside the repo)
 ```
 
 ## Rules
@@ -38,4 +40,4 @@ config/
 ## Commands
 - Tests: `pytest -q`
 - Lint: `ruff check . && ruff format --check .`
-- Security scan: `bandit -r cspm_triage`
+- Security scan: `bandit -r cspm_triage scripts`
