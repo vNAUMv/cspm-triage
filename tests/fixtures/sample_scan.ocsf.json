@@ -1,0 +1,1340 @@
+[
+  {
+    "message": "Root account has a virtual MFA instead of a hardware MFA device enabled.",
+    "metadata": {
+      "event_code": "iam_root_hardware_mfa_enabled",
+      "product": {
+        "name": "Prowler",
+        "uid": "prowler",
+        "vendor_name": "Prowler",
+        "version": "5.47.0"
+      },
+      "profiles": [
+        "cloud",
+        "datetime"
+      ],
+      "tenant_uid": "",
+      "version": "1.5.0"
+    },
+    "severity_id": 5,
+    "severity": "Critical",
+    "status": "New",
+    "status_code": "FAIL",
+    "status_detail": "Root account has a virtual MFA instead of a hardware MFA device enabled.",
+    "status_id": 1,
+    "unmapped": {
+      "related_url": "",
+      "categories": [
+        "identity-access"
+      ],
+      "depends_on": [],
+      "related_to": [],
+      "additional_urls": [
+        "https://www.trendmicro.com/trendaivisiononecloudriskmanagement/knowledge-base/aws/IAM/root-hardware-mfa.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_mfa"
+      ],
+      "notes": "",
+      "scan_id": "00000000-0000-4000-8000-ffff00000001",
+      "provider_uid": "123456789012",
+      "provider": "aws"
+    },
+    "activity_name": "Create",
+    "activity_id": 1,
+    "finding_info": {
+      "analytic": {
+        "category": "iam",
+        "name": "Root account has a hardware MFA device enabled",
+        "type": "Rule",
+        "type_id": 1,
+        "uid": "iam_root_hardware_mfa_enabled"
+      },
+      "created_time": 1793826847,
+      "created_time_dt": "2026-11-04T23:14:07.242539",
+      "desc": "**AWS root user** credentials are assessed for **MFA status** and device type. The check detects whether MFA is absent or implemented with a **virtual device** instead of **hardware MFA** on the root user, and notes when centralized root credential management is in effect.",
+      "attacks": [
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Privilege Escalation"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Initial Access"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Account Manipulation",
+            "src_url": "https://attack.mitre.org/techniques/T1098/",
+            "uid": "T1098"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Use Alternate Authentication Material",
+            "src_url": "https://attack.mitre.org/techniques/T1550/",
+            "uid": "T1550"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Lateral Movement"
+          },
+          "technique": {
+            "name": "Use Alternate Authentication Material",
+            "src_url": "https://attack.mitre.org/techniques/T1550/",
+            "uid": "T1550"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Brute Force",
+            "src_url": "https://attack.mitre.org/techniques/T1110/",
+            "uid": "T1110"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Network Sniffing",
+            "src_url": "https://attack.mitre.org/techniques/T1040/",
+            "uid": "T1040"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Discovery"
+          },
+          "technique": {
+            "name": "Network Sniffing",
+            "src_url": "https://attack.mitre.org/techniques/T1040/",
+            "uid": "T1040"
+          }
+        }
+      ],
+      "title": "Root account has a hardware MFA device enabled",
+      "types": [
+        "Software and Configuration Checks/AWS Security Best Practices",
+        "Software and Configuration Checks/Industry and Regulatory Standards/AWS Foundational Security Best Practices",
+        "Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"
+      ],
+      "uid": "prowler-aws-iam_root_hardware_mfa_enabled-123456789012-us-east-1-<root_account>"
+    },
+    "resources": [
+      {
+        "cloud_partition": "aws",
+        "region": "us-east-1",
+        "data": {
+          "details": "",
+          "metadata": {}
+        },
+        "group": {
+          "name": "iam"
+        },
+        "labels": [],
+        "name": "<root_account>",
+        "type": "AwsIamUser",
+        "uid": "arn:aws:iam::123456789012:mfa"
+      }
+    ],
+    "category_name": "Findings",
+    "category_uid": 2,
+    "class_name": "Detection Finding",
+    "class_uid": 2004,
+    "cloud": {
+      "account": {
+        "name": "",
+        "type": "AWS Account",
+        "type_id": 10,
+        "uid": "123456789012",
+        "labels": []
+      },
+      "org": {
+        "name": "",
+        "ou_uid": "",
+        "ou_name": "",
+        "uid": ""
+      },
+      "provider": "aws",
+      "region": "us-east-1"
+    },
+    "remediation": {
+      "desc": "Require a **hardware MFA token** for the root user and remove any virtual MFA. Apply **least privilege**: avoid using root, disable access keys, and eliminate long-term credentials. In organizations, **centralize root management**. Keep a controlled break-glass process with strict recovery checks and continuous monitoring.",
+      "references": [
+        "https://hub.prowler.com/check/iam_root_hardware_mfa_enabled"
+      ]
+    },
+    "risk_details": "Without **hardware MFA** on the root user:\n- No MFA: stolen password/keys enable full account takeover.\n- Virtual MFA: device compromise or backup restoration weakens second-factor assurance.\nAn attacker could delete resources, change policies, and disable logging, harming **confidentiality**, **integrity**, and **availability**.",
+    "time": 1793826847,
+    "time_dt": "2026-11-04T23:14:07.242539",
+    "type_uid": 200401,
+    "type_name": "Detection Finding: Create"
+  },
+  {
+    "message": "User example-user does not have any type of MFA enabled.",
+    "metadata": {
+      "event_code": "iam_user_hardware_mfa_enabled",
+      "product": {
+        "name": "Prowler",
+        "uid": "prowler",
+        "vendor_name": "Prowler",
+        "version": "5.47.0"
+      },
+      "profiles": [
+        "cloud",
+        "datetime"
+      ],
+      "tenant_uid": "",
+      "version": "1.5.0"
+    },
+    "severity_id": 4,
+    "severity": "High",
+    "status": "New",
+    "status_code": "FAIL",
+    "status_detail": "User example-user does not have any type of MFA enabled.",
+    "status_id": 1,
+    "unmapped": {
+      "related_url": "",
+      "categories": [
+        "identity-access"
+      ],
+      "depends_on": [],
+      "related_to": [],
+      "additional_urls": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_physical.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html",
+        "https://support.icompaas.com/support/solutions/articles/62000236278-ensure-iam-users-have-hardware-mfa-enabled"
+      ],
+      "notes": "",
+      "scan_id": "00000000-0000-4000-8000-ffff00000001",
+      "provider_uid": "123456789012",
+      "provider": "aws"
+    },
+    "activity_name": "Create",
+    "activity_id": 1,
+    "finding_info": {
+      "analytic": {
+        "category": "iam",
+        "name": "IAM user has hardware MFA enabled",
+        "type": "Rule",
+        "type_id": 1,
+        "uid": "iam_user_hardware_mfa_enabled"
+      },
+      "created_time": 1793826847,
+      "created_time_dt": "2026-11-04T23:14:07.242539",
+      "desc": "**IAM users** are evaluated for **hardware MFA** enrollment, identifying physical tokens or security keys and distinguishing them from *virtual* or *SMS* MFA, as well as users without any MFA.",
+      "attacks": [
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Privilege Escalation"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Initial Access"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Account Manipulation",
+            "src_url": "https://attack.mitre.org/techniques/T1098/",
+            "uid": "T1098"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Use Alternate Authentication Material",
+            "src_url": "https://attack.mitre.org/techniques/T1550/",
+            "uid": "T1550"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Lateral Movement"
+          },
+          "technique": {
+            "name": "Use Alternate Authentication Material",
+            "src_url": "https://attack.mitre.org/techniques/T1550/",
+            "uid": "T1550"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Brute Force",
+            "src_url": "https://attack.mitre.org/techniques/T1110/",
+            "uid": "T1110"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Network Sniffing",
+            "src_url": "https://attack.mitre.org/techniques/T1040/",
+            "uid": "T1040"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Discovery"
+          },
+          "technique": {
+            "name": "Network Sniffing",
+            "src_url": "https://attack.mitre.org/techniques/T1040/",
+            "uid": "T1040"
+          }
+        }
+      ],
+      "title": "IAM user has hardware MFA enabled",
+      "types": [
+        "Software and Configuration Checks/AWS Security Best Practices",
+        "Software and Configuration Checks/Industry and Regulatory Standards/AWS Foundational Security Best Practices",
+        "Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark",
+        "TTPs/Initial Access",
+        "TTPs/Credential Access"
+      ],
+      "uid": "prowler-aws-iam_user_hardware_mfa_enabled-123456789012-us-east-1-example-user"
+    },
+    "resources": [
+      {
+        "cloud_partition": "aws",
+        "region": "us-east-1",
+        "data": {
+          "details": "",
+          "metadata": {}
+        },
+        "group": {
+          "name": "iam"
+        },
+        "labels": [],
+        "name": "example-user",
+        "type": "AwsIamUser",
+        "uid": "arn:aws:iam::123456789012:user/example-user"
+      }
+    ],
+    "category_name": "Findings",
+    "category_uid": 2,
+    "class_name": "Detection Finding",
+    "class_uid": 2004,
+    "cloud": {
+      "account": {
+        "name": "",
+        "type": "AWS Account",
+        "type_id": 10,
+        "uid": "123456789012",
+        "labels": []
+      },
+      "org": {
+        "name": "",
+        "ou_uid": "",
+        "ou_name": "",
+        "uid": ""
+      },
+      "provider": "aws",
+      "region": "us-east-1"
+    },
+    "remediation": {
+      "desc": "Require **hardware-backed MFA** for all IAM users. Prefer **FIDO2 security keys** for phishing resistance over TOTP or SMS. Disallow SMS/virtual MFA for privileged roles. Enforce MFA for all access paths, apply **least privilege**, and provision multiple MFA devices per user for continuity.",
+      "references": [
+        "https://hub.prowler.com/check/iam_user_hardware_mfa_enabled"
+      ]
+    },
+    "risk_details": "Without **hardware MFA**, authentication is weaker:\n- **SIM-swap** can bypass SMS\n- **Phishing** can steal TOTP from virtual apps\n- No MFA allows password-only takeover\nThis enables unauthorized console/API access, causing data exfiltration (C), privilege abuse (I), and service disruption (A).",
+    "time": 1793826847,
+    "time_dt": "2026-11-04T23:14:07.242539",
+    "type_uid": 200401,
+    "type_name": "Detection Finding: Create"
+  },
+  {
+    "message": "IAM User example-user has Bedrock permissions but has never used them.",
+    "metadata": {
+      "event_code": "iam_user_access_not_stale_to_bedrock",
+      "product": {
+        "name": "Prowler",
+        "uid": "prowler",
+        "vendor_name": "Prowler",
+        "version": "5.47.0"
+      },
+      "profiles": [
+        "cloud",
+        "datetime"
+      ],
+      "tenant_uid": "",
+      "version": "1.5.0"
+    },
+    "severity_id": 3,
+    "severity": "Medium",
+    "status": "New",
+    "status_code": "FAIL",
+    "status_detail": "IAM User example-user has Bedrock permissions but has never used them.",
+    "status_id": 1,
+    "unmapped": {
+      "related_url": "",
+      "categories": [
+        "identity-access",
+        "gen-ai"
+      ],
+      "depends_on": [],
+      "related_to": [
+        "bedrock_api_key_no_administrative_privileges",
+        "bedrock_api_key_no_long_term_credentials"
+      ],
+      "additional_urls": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#remove-credentials"
+      ],
+      "notes": "The staleness threshold is configurable via the `max_unused_bedrock_access_days` audit config key (default: 60 days).",
+      "scan_id": "00000000-0000-4000-8000-ffff00000001",
+      "provider_uid": "123456789012",
+      "provider": "aws"
+    },
+    "activity_name": "Create",
+    "activity_id": 1,
+    "finding_info": {
+      "analytic": {
+        "category": "iam",
+        "name": "Regular Bedrock access ensures IAM users retain only actively used permissions",
+        "type": "Rule",
+        "type_id": 1,
+        "uid": "iam_user_access_not_stale_to_bedrock"
+      },
+      "created_time": 1793826847,
+      "created_time_dt": "2026-11-04T23:14:07.242539",
+      "desc": "IAM users granted **Bedrock** permissions are evaluated for recent service usage.\n\nUsers whose last Bedrock access exceeds the configured threshold (default **60 days**) or that have **never** accessed Bedrock are flagged, indicating stale permissions that should be reviewed.",
+      "attacks": [
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Privilege Escalation"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Initial Access"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        }
+      ],
+      "title": "Regular Bedrock access ensures IAM users retain only actively used permissions",
+      "types": [
+        "Software and Configuration Checks/AWS Security Best Practices"
+      ],
+      "uid": "prowler-aws-iam_user_access_not_stale_to_bedrock-123456789012-us-east-1-example-user"
+    },
+    "resources": [
+      {
+        "cloud_partition": "aws",
+        "region": "us-east-1",
+        "data": {
+          "details": "",
+          "metadata": {}
+        },
+        "group": {
+          "name": "iam"
+        },
+        "labels": [],
+        "name": "example-user",
+        "type": "AwsIamUser",
+        "uid": "arn:aws:iam::123456789012:user/example-user"
+      }
+    ],
+    "category_name": "Findings",
+    "category_uid": 2,
+    "class_name": "Detection Finding",
+    "class_uid": 2004,
+    "cloud": {
+      "account": {
+        "name": "",
+        "type": "AWS Account",
+        "type_id": 10,
+        "uid": "123456789012",
+        "labels": []
+      },
+      "org": {
+        "name": "",
+        "ou_uid": "",
+        "ou_name": "",
+        "uid": ""
+      },
+      "provider": "aws",
+      "region": "us-east-1"
+    },
+    "remediation": {
+      "desc": "Apply the **principle of least privilege** by regularly reviewing IAM Access Advisor data and revoking Bedrock permissions that are no longer actively used.\n\nEstablish a periodic access review process and automate alerts for stale permissions to maintain a minimal attack surface.",
+      "references": [
+        "https://hub.prowler.com/check/iam_user_access_not_stale_to_bedrock"
+      ]
+    },
+    "risk_details": "Stale Bedrock permissions widen the **blast radius** of a credential compromise.\n\nAn attacker who gains access to a user with unused Bedrock permissions can invoke foundation models, exfiltrate data through model responses, or incur significant costs — all without triggering expected usage patterns.",
+    "time": 1793826847,
+    "time_dt": "2026-11-04T23:14:07.242539",
+    "type_uid": 200401,
+    "type_name": "Detection Finding: Create"
+  },
+  {
+    "message": "User example-user has the policy ViewOnlyAccess attached.",
+    "metadata": {
+      "event_code": "iam_policy_attached_only_to_group_or_roles",
+      "product": {
+        "name": "Prowler",
+        "uid": "prowler",
+        "vendor_name": "Prowler",
+        "version": "5.47.0"
+      },
+      "profiles": [
+        "cloud",
+        "datetime"
+      ],
+      "tenant_uid": "",
+      "version": "1.5.0"
+    },
+    "severity_id": 2,
+    "severity": "Low",
+    "status": "New",
+    "status_code": "FAIL",
+    "status_detail": "User example-user has the policy ViewOnlyAccess attached.",
+    "status_id": 1,
+    "unmapped": {
+      "related_url": "",
+      "categories": [
+        "identity-access"
+      ],
+      "depends_on": [],
+      "related_to": [],
+      "additional_urls": [
+        "https://docs.aws.amazon.com/securityhub/latest/userguide/iam-controls.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+      ],
+      "notes": "CAF Security Epic: IAM",
+      "scan_id": "00000000-0000-4000-8000-ffff00000001",
+      "provider_uid": "123456789012",
+      "provider": "aws"
+    },
+    "activity_name": "Create",
+    "activity_id": 1,
+    "finding_info": {
+      "analytic": {
+        "category": "iam",
+        "name": "IAM user has no inline or attached policies",
+        "type": "Rule",
+        "type_id": 1,
+        "uid": "iam_policy_attached_only_to_group_or_roles"
+      },
+      "created_time": 1793826847,
+      "created_time_dt": "2026-11-04T23:14:07.242539",
+      "desc": "**IAM users** have identity-based policies attached directly (managed or inline) instead of inheriting permissions via **groups** or **roles**.",
+      "title": "IAM user has no inline or attached policies",
+      "types": [
+        "Software and Configuration Checks/AWS Security Best Practices",
+        "Software and Configuration Checks/Industry and Regulatory Standards/AWS Foundational Security Best Practices",
+        "Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"
+      ],
+      "uid": "prowler-aws-iam_policy_attached_only_to_group_or_roles-123456789012-us-east-1-example-user/ViewOnlyAccess"
+    },
+    "resources": [
+      {
+        "cloud_partition": "aws",
+        "region": "us-east-1",
+        "data": {
+          "details": "",
+          "metadata": {}
+        },
+        "group": {
+          "name": "iam"
+        },
+        "labels": [],
+        "name": "example-user/ViewOnlyAccess",
+        "type": "AwsIamUser",
+        "uid": "arn:aws:iam::123456789012:user/example-user"
+      }
+    ],
+    "category_name": "Findings",
+    "category_uid": 2,
+    "class_name": "Detection Finding",
+    "class_uid": 2004,
+    "cloud": {
+      "account": {
+        "name": "",
+        "type": "AWS Account",
+        "type_id": 10,
+        "uid": "123456789012",
+        "labels": []
+      },
+      "org": {
+        "name": "",
+        "ou_uid": "",
+        "ou_name": "",
+        "uid": ""
+      },
+      "provider": "aws",
+      "region": "us-east-1"
+    },
+    "remediation": {
+      "desc": "Assign permissions to **groups** (humans) and **roles** (workloads); avoid user-attached policies. Enforce **least privilege**, prefer federation and temporary credentials, and use tags or **permissions boundaries** to constrain scope. Review regularly to remove direct user policies and right-size access.",
+      "references": [
+        "https://hub.prowler.com/check/iam_policy_attached_only_to_group_or_roles"
+      ]
+    },
+    "risk_details": "Directly attached user policies hinder centralized control and cause privilege creep. If a user is compromised, excessive rights enable data exposure, resource tampering, and lateral movement, harming **confidentiality** and **integrity**. Revocation is error-prone, weakening **separation of duties** and auditability.",
+    "time": 1793826847,
+    "time_dt": "2026-11-04T23:14:07.242539",
+    "type_uid": 200401,
+    "type_name": "Detection Finding: Create"
+  },
+  {
+    "message": "MFA is enabled for root account.",
+    "metadata": {
+      "event_code": "iam_root_mfa_enabled",
+      "product": {
+        "name": "Prowler",
+        "uid": "prowler",
+        "vendor_name": "Prowler",
+        "version": "5.47.0"
+      },
+      "profiles": [
+        "cloud",
+        "datetime"
+      ],
+      "tenant_uid": "",
+      "version": "1.5.0"
+    },
+    "severity_id": 5,
+    "severity": "Critical",
+    "status": "New",
+    "status_code": "PASS",
+    "status_detail": "MFA is enabled for root account.",
+    "status_id": 1,
+    "unmapped": {
+      "related_url": "",
+      "categories": [
+        "identity-access"
+      ],
+      "depends_on": [],
+      "related_to": [],
+      "additional_urls": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html#id_root-user_manage_mfa"
+      ],
+      "notes": "",
+      "scan_id": "00000000-0000-4000-8000-ffff00000001",
+      "provider_uid": "123456789012",
+      "provider": "aws"
+    },
+    "activity_name": "Create",
+    "activity_id": 1,
+    "finding_info": {
+      "analytic": {
+        "category": "iam",
+        "name": "Root account has MFA enabled",
+        "type": "Rule",
+        "type_id": 1,
+        "uid": "iam_root_mfa_enabled"
+      },
+      "created_time": 1793826847,
+      "created_time_dt": "2026-11-04T23:14:07.242539",
+      "desc": "**AWS root user** with active credentials is assessed for **MFA activation**. The evaluation considers whether the root identity has a password or access keys and whether **MFA is enabled**.\n\n*If centralized root access is enabled in Organizations, the presence of individual root credentials is also noted.*",
+      "attacks": [
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Privilege Escalation"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Initial Access"
+          },
+          "technique": {
+            "name": "Valid Accounts",
+            "src_url": "https://attack.mitre.org/techniques/T1078/",
+            "uid": "T1078"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Account Manipulation",
+            "src_url": "https://attack.mitre.org/techniques/T1098/",
+            "uid": "T1098"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Persistence"
+          },
+          "technique": {
+            "name": "Modify Authentication Process",
+            "src_url": "https://attack.mitre.org/techniques/T1556/",
+            "uid": "T1556"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Use Alternate Authentication Material",
+            "src_url": "https://attack.mitre.org/techniques/T1550/",
+            "uid": "T1550"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Lateral Movement"
+          },
+          "technique": {
+            "name": "Use Alternate Authentication Material",
+            "src_url": "https://attack.mitre.org/techniques/T1550/",
+            "uid": "T1550"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Brute Force",
+            "src_url": "https://attack.mitre.org/techniques/T1110/",
+            "uid": "T1110"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Credential Access"
+          },
+          "technique": {
+            "name": "Network Sniffing",
+            "src_url": "https://attack.mitre.org/techniques/T1040/",
+            "uid": "T1040"
+          }
+        },
+        {
+          "tactic": {
+            "name": "Discovery"
+          },
+          "technique": {
+            "name": "Network Sniffing",
+            "src_url": "https://attack.mitre.org/techniques/T1040/",
+            "uid": "T1040"
+          }
+        }
+      ],
+      "title": "Root account has MFA enabled",
+      "types": [
+        "Software and Configuration Checks/AWS Security Best Practices",
+        "Software and Configuration Checks/Industry and Regulatory Standards/AWS Foundational Security Best Practices",
+        "Software and Configuration Checks/Industry and Regulatory Standards/CIS AWS Foundations Benchmark"
+      ],
+      "uid": "prowler-aws-iam_root_mfa_enabled-123456789012-us-east-1-<root_account>"
+    },
+    "resources": [
+      {
+        "cloud_partition": "aws",
+        "region": "us-east-1",
+        "data": {
+          "details": "",
+          "metadata": {}
+        },
+        "group": {
+          "name": "iam"
+        },
+        "labels": [],
+        "name": "<root_account>",
+        "type": "AwsIamUser",
+        "uid": "arn:aws:iam::123456789012:root"
+      }
+    ],
+    "category_name": "Findings",
+    "category_uid": 2,
+    "class_name": "Detection Finding",
+    "class_uid": 2004,
+    "cloud": {
+      "account": {
+        "name": "",
+        "type": "AWS Account",
+        "type_id": 10,
+        "uid": "123456789012",
+        "labels": []
+      },
+      "org": {
+        "name": "",
+        "ou_uid": "",
+        "ou_name": "",
+        "uid": ""
+      },
+      "provider": "aws",
+      "region": "us-east-1"
+    },
+    "remediation": {
+      "desc": "Enable **MFA** for the root user, preferably **hardware-based** or a dedicated, managed device. Remove root access keys and avoid using root for daily tasks. Apply **least privilege** with IAM Identity Center for admins, and use Organizations to **centralize root access** and eliminate long-lived root credentials.",
+      "references": [
+        "https://hub.prowler.com/check/iam_root_mfa_enabled"
+      ]
+    },
+    "risk_details": "Without **MFA**, compromise of the root password or access keys can lead to full **account takeover**. An attacker with root can disable protections, steal or delete data, change billing, and create persistent admins, undermining confidentiality, integrity, and availability.",
+    "time": 1793826847,
+    "time_dt": "2026-11-04T23:14:07.242539",
+    "type_uid": 200401,
+    "type_name": "Detection Finding: Create"
+  },
+  {
+    "message": "Resource Explorer Indexes found: 2.",
+    "metadata": {
+      "event_code": "resourceexplorer2_indexes_found",
+      "product": {
+        "name": "Prowler",
+        "uid": "prowler",
+        "vendor_name": "Prowler",
+        "version": "5.47.0"
+      },
+      "profiles": [
+        "cloud",
+        "datetime"
+      ],
+      "tenant_uid": "",
+      "version": "1.5.0"
+    },
+    "severity_id": 2,
+    "severity": "Low",
+    "status": "New",
+    "status_code": "PASS",
+    "status_detail": "Resource Explorer Indexes found: 2.",
+    "status_id": 1,
+    "unmapped": {
+      "related_url": "",
+      "categories": [
+        "forensics-ready"
+      ],
+      "depends_on": [],
+      "related_to": [],
+      "additional_urls": [
+        "https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-turn-on-region.html"
+      ],
+      "notes": "",
+      "scan_id": "00000000-0000-4000-8000-ffff00000001",
+      "provider_uid": "123456789012",
+      "provider": "aws"
+    },
+    "activity_name": "Create",
+    "activity_id": 1,
+    "finding_info": {
+      "analytic": {
+        "category": "resourceexplorer2",
+        "name": "Resource Explorer indexes exist",
+        "type": "Rule",
+        "type_id": 1,
+        "uid": "resourceexplorer2_indexes_found"
+      },
+      "created_time": 1793826847,
+      "created_time_dt": "2026-11-04T23:14:07.242539",
+      "desc": "**AWS Resource Explorer** has user-owned **indexes** present in the account. The assessment determines whether at least one index exists in any enabled Region for resource cataloging and search.",
+      "title": "Resource Explorer indexes exist",
+      "types": [
+        "Software and Configuration Checks/AWS Security Best Practices"
+      ],
+      "uid": "prowler-aws-resourceexplorer2_indexes_found-123456789012-us-east-1-123456789012"
+    },
+    "resources": [
+      {
+        "cloud_partition": "aws",
+        "region": "us-east-1",
+        "data": {
+          "details": "",
+          "metadata": {}
+        },
+        "group": {
+          "name": "resourceexplorer2"
+        },
+        "labels": [],
+        "name": "123456789012",
+        "type": "Other",
+        "uid": "arn:aws:resource-explorer-2:us-east-1:123456789012:index/00000000-0000-4000-8000-ffff00000002"
+      }
+    ],
+    "category_name": "Findings",
+    "category_uid": 2,
+    "class_name": "Detection Finding",
+    "class_uid": 2004,
+    "cloud": {
+      "account": {
+        "name": "",
+        "type": "AWS Account",
+        "type_id": 10,
+        "uid": "123456789012",
+        "labels": []
+      },
+      "org": {
+        "name": "",
+        "ou_uid": "",
+        "ou_name": "",
+        "uid": ""
+      },
+      "provider": "aws",
+      "region": "us-east-1"
+    },
+    "remediation": {
+      "desc": "Create **Resource Explorer indexes** in all active Regions and designate an **aggregator index** for cross-Region search. Apply least-privilege access to views, align with tagging standards, and routinely verify indexing status. This improves inventory accuracy, supports defense-in-depth, and speeds detection and remediation.",
+      "references": [
+        "https://hub.prowler.com/check/resourceexplorer2_indexes_found"
+      ]
+    },
+    "risk_details": "Absent indexes reduce asset visibility, creating blind spots where misconfigured or orphaned resources go unnoticed. This degrades **confidentiality** (unseen public exposure), **integrity** (unauthorized changes undetected), and **availability** (slower containment and recovery), prolonging incident response and enabling lateral movement.",
+    "time": 1793826847,
+    "time_dt": "2026-11-04T23:14:07.242539",
+    "type_uid": 200401,
+    "type_name": "Detection Finding: Create"
+  },
+  {
+    "message": "No KMS-from-enclave attestation events found in the last 2160h. Debug-mode status cannot be determined from available data; enclaves that never call KMS in the window are not observable via this check.",
+    "metadata": {
+      "event_code": "kms_key_enclave_debug_attestation_detected",
+      "product": {
+        "name": "Prowler",
+        "uid": "prowler",
+        "vendor_name": "Prowler",
+        "version": "5.47.0"
+      },
+      "profiles": [
+        "cloud",
+        "datetime"
+      ],
+      "tenant_uid": "",
+      "version": "1.5.0"
+    },
+    "severity_id": 4,
+    "severity": "High",
+    "status": "New",
+    "status_code": "MANUAL",
+    "status_detail": "No KMS-from-enclave attestation events found in the last 2160h. Debug-mode status cannot be determined from available data; enclaves that never call KMS in the window are not observable via this check.",
+    "status_id": 1,
+    "unmapped": {
+      "related_url": "",
+      "categories": [
+        "encryption",
+        "logging",
+        "trust-boundaries"
+      ],
+      "depends_on": [],
+      "related_to": [
+        "kms_key_enclave_attestation_not_enforced",
+        "kms_key_enclave_attestation_no_deployment_binding"
+      ],
+      "additional_urls": [
+        "https://docs.aws.amazon.com/enclaves/latest/user/cmd-nitro-run-enclave.html",
+        "https://docs.aws.amazon.com/kms/latest/developerguide/ct-nitro-enclave.html"
+      ],
+      "notes": "CloudTrail-based detection: enclaves that never call KMS in the window are unobservable and reported MANUAL. Truncated pages / max_events cap also emit MANUAL rather than PASS to avoid a false PASS. Only standard PCR fields (ImageDigest/PCR0, PCR1-4, PCR8) exposed by CloudTrail are inspected; custom PCRs are out of scope.",
+      "scan_id": "00000000-0000-4000-8000-ffff00000001",
+      "provider_uid": "123456789012",
+      "provider": "aws"
+    },
+    "activity_name": "Create",
+    "activity_id": 1,
+    "finding_info": {
+      "analytic": {
+        "category": "kms",
+        "name": "No Nitro Enclave debug-mode attestation observed against this KMS key",
+        "type": "Rule",
+        "type_id": 1,
+        "uid": "kms_key_enclave_debug_attestation_detected"
+      },
+      "created_time": 1793826847,
+      "created_time_dt": "2026-11-04T23:14:07.242539",
+      "desc": "Detects **Nitro Enclaves** launched with `--debug-mode` via CloudTrail KMS-from-enclave events. Debug enclaves produce attestations with zeroed image/kernel/application PCRs (PCR0/1/2); the check flags every KMS key that received such a call. Configurable via `enclave_debug_lookback_window_hours` (default 2160h / 90d) and `enclave_debug_max_events` (5000).",
+      "attacks": [
+        {
+          "tactic": {
+            "name": "Defense Evasion"
+          },
+          "technique": {
+            "name": "Impair Defenses",
+            "src_url": "https://attack.mitre.org/techniques/T1562/",
+            "uid": "T1562"
+          }
+        }
+      ],
+      "title": "No Nitro Enclave debug-mode attestation observed against this KMS key",
+      "types": [
+        "Software and Configuration Checks/AWS Security Best Practices"
+      ],
+      "uid": "prowler-aws-kms_key_enclave_debug_attestation_detected-123456789012-us-east-1-arn:aws:kms:us-east-1:123456789012:enclave-debug-attestation"
+    },
+    "resources": [
+      {
+        "cloud_partition": "aws",
+        "region": "us-east-1",
+        "data": {
+          "details": "",
+          "metadata": {}
+        },
+        "group": {
+          "name": "kms"
+        },
+        "labels": [],
+        "name": "arn:aws:kms:us-east-1:123456789012:enclave-debug-attestation",
+        "type": "AwsKmsKey",
+        "uid": "arn:aws:kms:us-east-1:123456789012:enclave-debug-attestation"
+      }
+    ],
+    "category_name": "Findings",
+    "category_uid": 2,
+    "class_name": "Detection Finding",
+    "class_uid": 2004,
+    "cloud": {
+      "account": {
+        "name": "",
+        "type": "AWS Account",
+        "type_id": 10,
+        "uid": "123456789012",
+        "labels": []
+      },
+      "org": {
+        "name": "",
+        "ou_uid": "",
+        "ou_name": "",
+        "uid": ""
+      },
+      "provider": "aws",
+      "region": "us-east-1"
+    },
+    "remediation": {
+      "desc": "Never run production Nitro Enclaves with `--debug-mode`. Enforce non-debug launch flags in the enclave orchestration pipeline and pair with strict PCR bindings on KMS policies so debug enclaves are rejected at the key-policy layer.",
+      "references": [
+        "https://hub.prowler.com/check/kms_key_enclave_debug_attestation_detected"
+      ]
+    },
+    "risk_details": "Debug mode zeros the image, kernel and application PCRs (PCR0/1/2) in the attestation document, so PCR-bound key policies release material to enclaves whose measurement cannot be trusted. A debug enclave calling this KMS key is functionally equivalent to no enclave at all.",
+    "time": 1793826847,
+    "time_dt": "2026-11-04T23:14:07.242539",
+    "type_uid": 200401,
+    "type_name": "Detection Finding: Create"
+  },
+  {
+    "message": "Login to the AWS Console. Choose your account name on the top right of the window -> My Account -> Contact Information.",
+    "metadata": {
+      "event_code": "account_maintain_current_contact_details",
+      "product": {
+        "name": "Prowler",
+        "uid": "prowler",
+        "vendor_name": "Prowler",
+        "version": "5.47.0"
+      },
+      "profiles": [
+        "cloud",
+        "datetime"
+      ],
+      "tenant_uid": "",
+      "version": "1.5.0"
+    },
+    "severity_id": 3,
+    "severity": "Medium",
+    "status": "New",
+    "status_code": "MANUAL",
+    "status_detail": "Login to the AWS Console. Choose your account name on the top right of the window -> My Account -> Contact Information.",
+    "status_id": 1,
+    "unmapped": {
+      "related_url": "",
+      "categories": [],
+      "depends_on": [],
+      "related_to": [],
+      "additional_urls": [
+        "https://repost.aws/knowledge-center/update-phone-number",
+        "https://support.stax.io/docs/accounts/update-aws-account-contact-details",
+        "https://maartenbruntink.nl/blog/2022/09/26/aws-account-hygiene-101-mass-updating-alternate-account-contacts/",
+        "https://docs.aws.amazon.com/security-ir/latest/userguide/update-account-contact-info.html",
+        "https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html",
+        "https://repost.aws/knowledge-center/add-update-billing-contact",
+        "https://aws.amazon.com/blogs/security/update-the-alternate-security-contact-across-your-aws-accounts-for-timely-security-notifications/",
+        "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_update_contacts.html",
+        "https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html"
+      ],
+      "notes": "",
+      "scan_id": "00000000-0000-4000-8000-ffff00000001",
+      "provider_uid": "123456789012",
+      "provider": "aws"
+    },
+    "activity_name": "Create",
+    "activity_id": 1,
+    "finding_info": {
+      "analytic": {
+        "category": "account",
+        "name": "AWS account contact information is current",
+        "type": "Rule",
+        "type_id": 1,
+        "uid": "account_maintain_current_contact_details"
+      },
+      "created_time": 1793826847,
+      "created_time_dt": "2026-11-04T23:14:07.242539",
+      "desc": "**AWS account contact information** is current for the **primary contact** and the **alternate contacts** for `security`, `billing`, and `operations`, with accurate email addresses and phone numbers.",
+      "title": "AWS account contact information is current",
+      "types": [
+        "Software and Configuration Checks/Industry and Regulatory Standards/AWS Foundational Security Best Practices"
+      ],
+      "uid": "prowler-aws-account_maintain_current_contact_details-123456789012-us-east-1-123456789012"
+    },
+    "resources": [
+      {
+        "cloud_partition": "aws",
+        "region": "us-east-1",
+        "data": {
+          "details": "",
+          "metadata": {}
+        },
+        "group": {
+          "name": "account"
+        },
+        "labels": [],
+        "name": "123456789012",
+        "type": "Other",
+        "uid": "arn:aws:iam::123456789012:root"
+      }
+    ],
+    "category_name": "Findings",
+    "category_uid": 2,
+    "class_name": "Detection Finding",
+    "class_uid": 2004,
+    "cloud": {
+      "account": {
+        "name": "",
+        "type": "AWS Account",
+        "type_id": 10,
+        "uid": "123456789012",
+        "labels": []
+      },
+      "org": {
+        "name": "",
+        "ou_uid": "",
+        "ou_name": "",
+        "uid": ""
+      },
+      "provider": "aws",
+      "region": "us-east-1"
+    },
+    "remediation": {
+      "desc": "Adopt:\n- **Primary** and **alternate contacts** for `security`, `billing`, `operations`\n- Shared, monitored aliases and SMS-capable phone numbers (non-personal)\n- Centralized management across accounts with periodic reviews\n- **Least privilege** for who can modify contact data\n- Regular reachability tests and documented ownership",
+      "references": [
+        "https://hub.prowler.com/check/account_maintain_current_contact_details"
+      ]
+    },
+    "risk_details": "Outdated or single-person contacts delay **security notifications**, slow **incident response**, and complicate **account recovery**.\n\nAWS may throttle services during abuse mitigation, reducing **availability**. Missed alerts enable ongoing misuse, risking **data exfiltration** and unauthorized changes (**integrity**).",
+    "time": 1793826847,
+    "time_dt": "2026-11-04T23:14:07.242539",
+    "type_uid": 200401,
+    "type_name": "Detection Finding: Create"
+  }
+]

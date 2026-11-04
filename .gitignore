@@ -219,3 +219,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 .idea/
+
+# Real Prowler scan output must never be committed; only sanitized fixtures.
+*.ocsf.json
+!tests/fixtures/*.ocsf.json
