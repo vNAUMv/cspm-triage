@@ -1,0 +1,36 @@
+# Example accepted risks (fake data only).
+#
+# Copy this file to config/exceptions.toml (gitignored) and replace the entries
+# with your own. Each [[exceptions]] table suppresses matching findings:
+#
+#   check_id   required  Prowler check ID, exact match on metadata.event_code
+#   resources  optional  glob patterns on resource UIDs (case-sensitive; "*" also
+#                        matches "/"). Every resource of a finding must match.
+#                        Omitted or empty: the whole check is accepted.
+#   region     optional  exact match on the finding's region
+#   reason     required  why the risk is accepted
+#   owner      required  who is accountable for it
+#   expires    required  a TOML date (2027-01-31, no time). The exception applies
+#                        up to and including this date; after that it is ignored
+#                        and reported as a warning.
+
+[[exceptions]]
+check_id = "iam_user_hardware_mfa_enabled"
+resources = ["arn:aws:iam::123456789012:user/example-user"]
+reason = "Break-glass user; virtual MFA accepted until hardware keys arrive"
+owner = "security-team@example.com"
+expires = 2027-03-31
+
+[[exceptions]]
+check_id = "iam_role_cross_service_confused_deputy_prevention"
+resources = ["arn:aws:iam::123456789012:role/example-role*"]
+region = "us-east-1"
+reason = "Trust policy reviewed; service does not support source-account conditions"
+owner = "platform-team@example.com"
+expires = 2027-06-30
+
+[[exceptions]]
+check_id = "organizations_tags_policies_enabled_and_attached"
+reason = "Single-account setup; tag policies not applicable"
+owner = "security-team@example.com"
+expires = 2027-12-31

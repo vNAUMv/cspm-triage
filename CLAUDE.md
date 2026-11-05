@@ -23,7 +23,7 @@ cspm_triage/
 tests/
   fixtures/      # sanitized sample Prowler output (no real account IDs or ARNs)
 config/
-  exceptions.toml # accepted risks
+  exceptions.example.toml # sample accepted risks (fake data); copy to exceptions.toml, which is gitignored
 scripts/
   sanitize_fixture.py # build a sanitized test fixture from a real scan (input stays outside the repo)
 ```

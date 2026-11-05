@@ -223,3 +223,6 @@ __marimo__/
 # Real Prowler scan output must never be committed; only sanitized fixtures.
 *.ocsf.json
 !tests/fixtures/*.ocsf.json
+
+# Real accepted risks may name real resources; only the example file is committed.
+config/exceptions.toml
