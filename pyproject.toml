@@ -9,6 +9,9 @@ description = "Triage, diff, and report on Prowler OCSF scan results."
 requires-python = ">=3.11"
 dependencies = []
 
+[project.scripts]
+cspm-triage = "cspm_triage.cli:main"
+
 [project.optional-dependencies]
 dev = ["pytest", "ruff", "bandit"]
 

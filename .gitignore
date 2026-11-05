@@ -226,3 +226,6 @@ __marimo__/
 
 # Real accepted risks may name real resources; only the example file is committed.
 config/exceptions.toml
+
+# Reports contain real resource ARNs and account IDs.
+reports/

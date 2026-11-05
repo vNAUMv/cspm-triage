@@ -31,6 +31,7 @@ from cspm_triage.triage import (
     AcceptedRisk,
     TriageResult,
     expired_warnings,
+    severity_rank,
     sort_key,
     triage,
 )
@@ -92,6 +93,17 @@ class DiffEntry:
     gone_reason: GoneReason | None = None
     status_change: tuple[str, str] | None = None
     severity_change: tuple[str, str] | None = None
+    # The matching exception: the current one for ACCEPTED entries, the baseline
+    # one for NEW entries with reason NO_LONGER_ACCEPTED; otherwise None.
+    accepted_by: AcceptedRisk | None = None
+
+
+def severity_increased(entry: DiffEntry) -> bool:
+    """True if the severity rose; an unknown severity ranks above Critical."""
+    if entry.severity_change is None:
+        return False
+    before, after = entry.severity_change
+    return severity_rank(after) < severity_rank(before)
 
 
 @dataclass(frozen=True, slots=True)
@@ -156,6 +168,24 @@ def finding_states(index: dict[str, Finding], result: TriageResult) -> dict[str,
     states.update(dict.fromkeys((f.finding_uid for f in result.attention), State.ATTENTION))
     states.update(dict.fromkeys((s.finding.finding_uid for s in result.accepted), State.ACCEPTED))
     return states
+
+
+def accepted_risks_by_uid(result: TriageResult) -> dict[str, AcceptedRisk]:
+    """Map each accepted finding's uid to the exception that matched it."""
+    return {s.finding.finding_uid: s.risk for s in result.accepted}
+
+
+def attach_risk(
+    entry: DiffEntry,
+    base_risks: dict[str, AcceptedRisk],
+    cur_risks: dict[str, AcceptedRisk],
+) -> DiffEntry:
+    """Fill accepted_by for ACCEPTED and NO_LONGER_ACCEPTED entries."""
+    if entry.category is Category.ACCEPTED:
+        return replace(entry, accepted_by=cur_risks.get(entry.key))
+    if entry.new_reason is NewReason.NO_LONGER_ACCEPTED:
+        return replace(entry, accepted_by=base_risks.get(entry.key))
+    return entry
 
 
 def findings_by_check(findings: Iterable[Finding]) -> dict[CheckKey, list[Finding]]:
@@ -294,6 +324,8 @@ def diff_scans(
     base_states = finding_states(base_index, base_result)
     cur_states = finding_states(cur_index, cur_result)
     checks = (findings_by_check(base_list), findings_by_check(cur_list))
+    base_risks = accepted_risks_by_uid(base_result)
+    cur_risks = accepted_risks_by_uid(cur_result)
 
     groups: dict[Category, list[DiffEntry]] = {category: [] for category in Category}
     for key in base_index.keys() | cur_index.keys():
@@ -304,7 +336,7 @@ def diff_scans(
             checks,
         )
         if entry is not None:
-            groups[entry.category].append(entry)
+            groups[entry.category].append(attach_risk(entry, base_risks, cur_risks))
 
     def ordered(category: Category) -> tuple[DiffEntry, ...]:
         return tuple(sorted(groups[category], key=_entry_sort_key))

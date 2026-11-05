@@ -15,6 +15,7 @@ from cspm_triage.diff import (
     NewReason,
     State,
     diff_scans,
+    severity_increased,
 )
 from cspm_triage.models import Finding
 from cspm_triage.parser import load_findings
@@ -274,3 +275,42 @@ def test_empty_scan_checked_before_accounts() -> None:
 def test_bad_filter_arguments_raise() -> None:
     with pytest.raises(ValueError, match="unknown minimum severity"):
         run(BASELINE, min_severity="urgent")
+
+
+# --- accepted_by and severity_increased -----------------------------------
+
+
+def test_accepted_entry_carries_current_risk() -> None:
+    baseline = [
+        replace(f, resource_uids=(USER_ARN, OTHER_USER_ARN)) if f.event_code == USER_CHECK else f
+        for f in BASELINE
+    ]
+    risk = accepted_risk()
+    entry = only(diff_scans(baseline, BASELINE, [risk], TODAY).accepted)
+    assert entry.accepted_by is risk
+
+
+def test_no_longer_accepted_entry_carries_baseline_risk() -> None:
+    risk = accepted_risk()
+    current = edit(USER_CHECK, resource_uids=(USER_ARN, OTHER_USER_ARN))
+    assert only(run(current, [risk]).new).accepted_by is risk
+
+
+def test_other_entries_have_no_risk() -> None:
+    result = run(edit(USER_CHECK, status="PASS"))
+    assert all(e.accepted_by is None for e in (*result.persisting, *result.resolved))
+
+
+@pytest.mark.parametrize(
+    ("change", "increased"),
+    [
+        (None, False),
+        (("High", "Critical"), True),
+        (("Critical", "High"), False),
+        (("Low", "Fatal"), True),  # unknown ranks above Critical
+        (("Fatal", "Critical"), False),
+    ],
+)
+def test_severity_increased(change: tuple[str, str] | None, increased: bool) -> None:
+    entry = only(run(BASELINE).persisting[:1])
+    assert severity_increased(replace(entry, severity_change=change)) is increased

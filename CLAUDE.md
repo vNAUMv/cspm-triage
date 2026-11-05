@@ -26,6 +26,7 @@ config/
   exceptions.example.toml # sample accepted risks (fake data); copy to exceptions.toml, which is gitignored
 scripts/
   sanitize_fixture.py # build a sanitized test fixture from a real scan (input stays outside the repo)
+reports/          # generated reports (gitignored; they contain real ARNs)
 ```
 
 ## Rules
@@ -37,8 +38,13 @@ scripts/
 - Work in small steps: propose a plan first for any task that touches more than one file, and wait for my approval.
 - Do not run commands that modify anything outside this repository.
 - Real scans live outside the repo. Read them only when I ask. Never print resource IDs, ARNs, account IDs or usernames from real data; print counts and check names only.
+- Reports contain real resource ARNs and account IDs. Write them to stdout or to `reports/` (gitignored); never commit them.
+- Report text from scans and exception files is untrusted: pass every such value through `report.escape()` or `report.code()` (or the same `Fmt` methods, which also apply `--redact-account`).
+- `--redact-account` removes account IDs only, not other identifiers. Never call it anonymization.
 
 ## Commands
 - Tests: `pytest -q`
 - Lint: `ruff check . && ruff format --check .`
 - Security scan: `bandit -r cspm_triage scripts`
+- Install the CLI: `pip install -e .`
+- Run: `cspm-triage triage SCAN --output reports/triage.md` and `cspm-triage diff BASELINE CURRENT --output reports/diff.md` (exit codes: `cspm-triage --help`)
