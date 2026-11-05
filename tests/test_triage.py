@@ -10,6 +10,7 @@ import pytest
 from cspm_triage.models import Finding
 from cspm_triage.triage import (
     AcceptedRisk,
+    expired_warnings,
     filter_findings,
     is_active,
     load_accepted_risks,
@@ -32,6 +33,7 @@ BASE_FINDING = Finding(
     title="IAM user has hardware MFA enabled",
     status_detail="User example-user does not have any type of MFA enabled.",
     finding_uid="prowler-aws-iam_user_hardware_mfa_enabled-123456789012-us-east-1-example-user",
+    account_uid="123456789012",
     resource_uids=(USER_ARN,),
     region="us-east-1",
     remediation_desc="Enable hardware MFA.",
@@ -216,6 +218,14 @@ def test_expired_risk_does_not_suppress_and_warns() -> None:
         "exceptions.toml: exception #2 (iam_user_hardware_mfa_enabled) expired on 2026-06-14; "
         "not applied",
     )
+
+
+def test_expired_warnings_lists_only_expired_risks() -> None:
+    risks = [risk(position=1), risk(position=2, expires=TODAY - timedelta(days=1))]
+    assert expired_warnings(risks, TODAY) == [
+        "exceptions.toml: exception #2 (iam_user_hardware_mfa_enabled) expired on 2026-06-14; "
+        "not applied"
+    ]
 
 
 def test_expired_risk_warns_even_without_matching_findings() -> None:

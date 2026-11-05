@@ -226,7 +226,8 @@ def risk_matches(risk: AcceptedRisk, finding: Finding) -> bool:
     )
 
 
-def _expired_warnings(risks: Iterable[AcceptedRisk], today: date) -> list[str]:
+def expired_warnings(risks: Iterable[AcceptedRisk], today: date) -> list[str]:
+    """Return one warning per accepted risk that has expired on the given date."""
     return [
         f"{r.source}: exception #{r.position} ({r.check_id}) expired on "
         f"{r.expires.isoformat()}; not applied"
@@ -278,5 +279,5 @@ def triage(
     return TriageResult(
         attention=tuple(sort_findings(attention)),
         accepted=tuple(sorted(accepted, key=lambda s: sort_key(s.finding))),
-        warnings=(*_expired_warnings(risks, today), *_unknown_value_warnings(selected)),
+        warnings=(*expired_warnings(risks, today), *_unknown_value_warnings(selected)),
     )

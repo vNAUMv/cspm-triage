@@ -36,6 +36,7 @@ scripts/
 - Do not invent fields of the Prowler OCSF format or Jira API parameters. If unsure, say so and ask me to check the documentation or a real sample.
 - Work in small steps: propose a plan first for any task that touches more than one file, and wait for my approval.
 - Do not run commands that modify anything outside this repository.
+- Real scans live outside the repo. Read them only when I ask. Never print resource IDs, ARNs, account IDs or usernames from real data; print counts and check names only.
 
 ## Commands
 - Tests: `pytest -q`

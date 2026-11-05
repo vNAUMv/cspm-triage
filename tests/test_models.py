@@ -15,6 +15,7 @@ def make_finding() -> Finding:
         title="Root account has MFA enabled",
         status_detail="MFA is enabled for root account.",
         finding_uid="prowler-aws-iam_root_mfa_enabled-123456789012-us-east-1-<root_account>",
+        account_uid="123456789012",
         resource_uids=("arn:aws:iam::123456789012:root",),
         region="us-east-1",
         remediation_desc="Enable MFA for the root user.",

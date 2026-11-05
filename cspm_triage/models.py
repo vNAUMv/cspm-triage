@@ -15,7 +15,8 @@ class Finding:
     severity: str  # severity, kept as free text so unknown values still parse
     title: str  # finding_info.title
     status_detail: str  # status_detail
-    finding_uid: str  # finding_info.uid
+    finding_uid: str  # finding_info.uid (stable across scans; used as the diff key)
+    account_uid: str  # cloud.account.uid
     resource_uids: tuple[str, ...]  # resources[].uid
     region: str  # cloud.region
     remediation_desc: str  # remediation.desc

@@ -49,6 +49,7 @@ def parse_finding(raw: dict[str, Any]) -> Finding:
         title=_get(raw, "finding_info.title", str),
         status_detail=_get(raw, "status_detail", str),
         finding_uid=_get(raw, "finding_info.uid", str),
+        account_uid=_get(raw, "cloud.account.uid", str),
         resource_uids=resource_uids,
         region=_get(raw, "cloud.region", str),
         remediation_desc=_get(raw, "remediation.desc", str),

@@ -28,7 +28,7 @@ def minimal_record() -> dict[str, Any]:
         },
         "status_detail": "User example-user does not have any type of MFA enabled.",
         "resources": [{"uid": "arn:aws:iam::123456789012:user/example-user"}],
-        "cloud": {"region": "us-east-1"},
+        "cloud": {"account": {"uid": "123456789012"}, "region": "us-east-1"},
         "remediation": {
             "desc": "Require hardware-backed MFA for all IAM users.",
             "references": ["https://hub.prowler.com/check/iam_user_hardware_mfa_enabled"],
@@ -63,6 +63,7 @@ def test_load_fixture_maps_fields() -> None:
     )
     assert finding.resource_uids == ("arn:aws:iam::123456789012:user/example-user",)
     assert finding.region == "us-east-1"
+    assert finding.account_uid == FAKE_ACCOUNT
     assert finding.title
     assert finding.remediation_desc
     assert finding.remediation_references == (
@@ -112,6 +113,7 @@ def test_non_object_resource_raises() -> None:
         ("metadata", "event_code", "metadata.event_code"),
         ("finding_info", "uid", "finding_info.uid"),
         ("cloud", "region", "cloud.region"),
+        ("cloud", "account", "cloud.account.uid"),
         ("remediation", "references", "remediation.references"),
     ],
 )
