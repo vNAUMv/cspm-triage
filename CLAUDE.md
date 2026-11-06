@@ -46,5 +46,6 @@ reports/          # generated reports (gitignored; they contain real ARNs)
 - Tests: `pytest -q`
 - Lint: `ruff check . && ruff format --check .`
 - Security scan: `bandit -r cspm_triage scripts`
+- CI: `.github/workflows/ci.yml` (actions pinned by SHA)
 - Install the CLI: `pip install -e .`
 - Run: `cspm-triage triage SCAN --output reports/triage.md` and `cspm-triage diff BASELINE CURRENT --output reports/diff.md` (exit codes: `cspm-triage --help`)

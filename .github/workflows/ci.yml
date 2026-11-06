@@ -1,0 +1,132 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Python for the single-version jobs (lint, security, smoke): the newest supported one.
+  PYTHON_VERSION: "3.14"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+
+# Third-party actions are pinned by full commit SHA; the comment gives the version.
+# Dependabot (.github/dependabot.yml) opens PRs that update both.
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: ruff format --check .
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        # The first entry must match requires-python in pyproject.toml (the declared
+        # minimum); the second is the newest supported version.
+        python-version: ["3.11", "3.14"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # gitleaks CLI (MIT licensed), downloaded from its GitHub release and verified
+      # against the SHA-256 from that release's checksums file. Version without "v".
+      GITLEAKS_VERSION: "8.30.1"
+      GITLEAKS_SHA256: "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # full history for gitleaks
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e ".[dev]"
+      - run: bandit -r cspm_triage scripts
+      - name: Install gitleaks
+        run: |
+          archive="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          cd "$RUNNER_TEMP"
+          curl -fsSL -o "$archive" \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${archive}"
+          echo "${GITLEAKS_SHA256}  ${archive}" | sha256sum -c -
+          tar -xzf "$archive" gitleaks
+          ./gitleaks version
+      - name: Scan full git history with gitleaks
+        # Newer gitleaks releases scan history with `gitleaks git`; older ones used
+        # `gitleaks detect`. Check this against the pinned GITLEAKS_VERSION.
+        # --redact keeps any matched secret out of the public CI log.
+        run: '"$RUNNER_TEMP/gitleaks" git --redact --verbose --exit-code 1 .'
+
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e .
+      - name: Check CLI exit codes on the fixture
+        # No config/exceptions.toml in the repo (gitignored), so no exceptions apply.
+        # --today keeps the result independent of the calendar date.
+        run: |
+          fixture=tests/fixtures/sample_scan.ocsf.json
+          failed=0
+          expect() {
+            want=$1; shift
+            set +e
+            "$@" > /dev/null
+            got=$?
+            set -e
+            if [ "$got" -eq "$want" ]; then
+              echo "ok: exit $got: $*"
+            else
+              echo "::error::expected exit $want, got $got: $*"
+              failed=1
+            fi
+          }
+          expect 1 cspm-triage triage "$fixture" --today 2026-06-15
+          expect 0 cspm-triage diff "$fixture" "$fixture" --today 2026-06-15
+          expect 2 cspm-triage triage does-not-exist.ocsf.json
+          exit "$failed"

@@ -1,0 +1,10 @@
+version: 2
+updates:
+  # Keeps the SHA-pinned actions in .github/workflows/ up to date (SHA and version comment).
+  # Not covered: the gitleaks CLI version and checksum in ci.yml (update by hand), and
+  # Python dev tools, which are unpinned in pyproject.toml (backlog: pin them, then
+  # add the pip ecosystem here).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
