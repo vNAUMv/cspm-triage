@@ -47,9 +47,8 @@ Raw FAIL count is a poor metric; triage and diff are what make it meaningful.
     scan, so it asked instead. A direct effect of the CLAUDE.md rule "don't invent fields of the
     Prowler OCSF format".
   - It deviated from the approved plan once (where `region` is read from), said so explicitly and
-    explained why, instead of changing it silently. [check: confirm details]
-  - It validated design decisions against the real scan ("matches in all 92 findings") rather than
-    assuming.
+    explained why, instead of changing it silently.
+  - It validated that decision against all 92 findings of the first real scan rather than assuming.
   - It promised to show the fixture before committing, and did.
 - **Data handling:**
   - Two layers against leaks: the sanitizer refuses to write if any original identifier remains, and
@@ -59,7 +58,7 @@ Raw FAIL count is a poor metric; triage and diff are what make it meaningful.
     rewritten as a generic `scripts/sanitize_fixture.py` that reads real values only from its input
     and has its own tests on fake data.
   - The agent did not repeat a grep that contained the real account ID after I stopped it, and
-    understood why: the real ID should not appear in its commands or context. [check: confirm]
+    understood why: the real ID should not appear in its commands or context.
 - **What went wrong:** `git push` failed: the SSH key has a passphrase and the agent's shell has no
   TTY to prompt. The agent diagnosed it correctly, but its suggested workaround (running `ssh-add`
   from its own shell) could not work for the same reason.
@@ -158,3 +157,28 @@ Raw FAIL count is a poor metric; triage and diff are what make it meaningful.
   find unknown ones.
 - **Validation on real data:** triage exit 0 (0 need attention, 58 accepted); diff scan 2 → 3
   exit 1 (6 new); diff scan 1 → 4 exit 0.
+
+### CI (GitHub Actions)
+
+Jira integration was postponed, so CI came before it.
+
+- **Design:** four jobs (lint, test, security, smoke), `permissions: contents: read`, no secrets,
+  `persist-credentials: false` on checkout. Third-party actions are pinned by full commit SHA and
+  updated by Dependabot. The test job runs a matrix of the declared minimum Python (3.11) and the
+  newest (3.14): testing the declared minimum matters more than avoiding a duplicated version number.
+- **gitleaks:** run as the MIT-licensed CLI rather than the official action, so no license key or
+  secrets are needed. The release tarball is verified with `sha256sum -c` before it runs, it scans
+  the full history (`fetch-depth: 0`), and `--redact` keeps any match out of the public log.
+- **Agent left versions to me:** per the CLAUDE.md "don't invent" rule, it wrote placeholders for
+  action SHAs and the gitleaks checksum and listed what it was unsure about (gitleaks subcommand,
+  action inputs) instead of guessing.
+- **What went wrong:** my first `git ls-remote` filter kept only annotated tags (`^{}`) and returned
+  outdated versions for both actions — the latest releases use lightweight tags.
+- **How it was caught:** listing all tags and cross-checking that the major tag (`v7`) points to the
+  same commit. Pinning by SHA is only as good as checking that it's the right SHA.
+- **Smoke test:** the fixture deliberately contains FAIL findings, so the smoke job asserts the
+  *expected* exit codes (triage → 1, diff of the fixture with itself → 0, missing file → 2) rather
+  than requiring 0. The agent changed one expected code on purpose to confirm a mismatch fails the job.
+- **Green on the first run, so I checked it wasn't vacuous:** gitleaks scanned 10/10 commits
+  (matches `git rev-list --count HEAD`), the 3.11 matrix job really ran CPython 3.11.18, and the
+  smoke job checked all three exit codes. A check that can't fail checks nothing.
